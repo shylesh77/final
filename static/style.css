@@ -1,0 +1,47 @@
+html,body {
+    height: 100%;
+}
+
+body
+{
+  text-align: center;
+}
+
+.icons
+{
+  padding: 10% 0;
+}
+
+img
+{
+  height: 200px;
+  width: 200px
+}
+
+.hicon
+{
+padding-top: 30px;
+padding-bottom: 30px;
+}
+
+.navbutton
+{
+  background-color: black;
+}
+
+.navelements
+{
+  color: black;
+}
+.zoom
+{
+  padding: 50px;
+  transition: transform .2s;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+.zoom:hover
+{
+  transform: scale(1.5);
+}
