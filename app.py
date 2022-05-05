@@ -31,7 +31,6 @@ id=0
 glucose=0
 m=""
 msg=EmailMessage()
-msg['Subject']='Heart Disease Diagnosis'
 msg['From']='shreeshyleshronaldo@gmail.com'
 app = Flask(__name__,static_folder='static')
 app.config['MYSQL_HOST']='db1.cptkkmu0skgi.ap-south-1.rds.amazonaws.com'
@@ -187,7 +186,7 @@ def predic():
     print(prediction)
     if prediction==0:
         m="ʏᴏᴜ ʜᴀᴠᴇ no ʀɪꜱᴋ ᴏꜰ ɢᴇᴛᴛɪɴɢ ʜᴇᴀʀᴛ ᴅɪꜱᴇᴀꜱᴇ. ᴋɪɴᴅʟʏ ᴄᴏɴꜱᴜʟᴛ ᴀ ᴅᴏᴄᴛᴏʀ"
-        msg.set_content(m)
+        msg['Subject'] = m
         cur=mysql.connection.cursor()
         cur.execute("SELECT * FROM user_result where USER_ID=%s",[id])
         result=cur.fetchall()
@@ -199,11 +198,12 @@ def predic():
         msg['To']=pm
         server.send_message(msg)
         del msg['To']
+        del msg['Subject']
         return render_template("negative.html")
         
     else:
         m="ʏᴏᴜ ʜᴀᴠᴇ ʀɪꜱᴋ ᴏꜰ ɢᴇᴛᴛɪɴɢ ʜᴇᴀʀᴛ ᴅɪꜱᴇᴀꜱᴇ. ᴋɪɴᴅʟʏ ᴄᴏɴꜱᴜʟᴛ ᴀ ᴅᴏᴄᴛᴏʀ"
-        msg.set_content(m)
+        msg['Subject'] = m
         cur=mysql.connection.cursor()
         cur.execute("SELECT * FROM user_result where USER_ID=%s",[id])
         result=cur.fetchall()
@@ -223,6 +223,7 @@ def predic():
         msg['To']=dm
         server.send_message(msg)
         del msg['To']
+        del msg['Subject']
         return render_template('positive.html')
     
 @app.route('/details',methods=['POST'])
